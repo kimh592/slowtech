@@ -1,7 +1,7 @@
 /* SLOW ARCHIVE — COURSE VERSION
    HTML + CSS only. The one extra feature is the native music player.
    Lessons: CSS selectors, box model, positioning, responsive design,
-   flexbox, and grid. No hover animations and no JavaScript. */
+   flexbox, and grid. Only tag color changes on hover; no JavaScript. */
 
 /* 1. BASIC CSS + BOX MODEL */
 * {
@@ -9,7 +9,7 @@
 }
 
 body {
-  margin: 0;
+  margin: 1rem;
   background-color: white;
   color: black;
   font-family: Arial, Helvetica, sans-serif;
@@ -22,6 +22,11 @@ button {
 
 a {
   color: inherit;
+}
+
+header p {
+  margin-inline-start: 7rem;
+  margin-inline-end: 7rem;
 }
 
 /* 2. PAGE STRUCTURE — FLEXBOX */
@@ -44,15 +49,15 @@ a {
 }
 
 .site-credit {
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin: 1.5rem 0 0;
 }
 
 .site-intro {
-  max-width: 36rem;
-  margin: 2rem auto 0;
+  max-width: 50rem;
+  margin: 2rem auto 0;Z
   padding: 0 1.5rem;
-  font-size: 1.2rem;
+  font-size: 0.6rem;
   line-height: 1.2;
 }
 
@@ -74,22 +79,39 @@ a {
   width: 100%;
   margin: 0;
   padding: 0;
-  border: 1px solid #ddddcc;
+  border: none;
   background-color: white;
   cursor: pointer;
   text-align: left;
 }
 
+/* Each source cover has a static PNG and an animated GIF. */
 .source-card img {
   display: block;
   width: 100%;
   height: auto;
 }
 
+/* Hide the animation until its cover is hovered or keyboard-focused. */
+.source-card .cover-gif {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.source-card:hover .cover-gif,
+.source-card:focus-visible .cover-gif {
+  display: block;
+}
+
 .source-number {
   position: absolute;
   top: 0.75rem;
   left: 0.75rem;
+  z-index: 1;
   font-size: 0.85rem;
   font-weight: bold;
 }
@@ -197,6 +219,10 @@ a {
   grid-column: 2;
   grid-row: 1;
   padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
 }
 
 .dialog-type {
@@ -206,7 +232,7 @@ a {
 }
 
 .dialog-name {
-  margin: 0.3rem 0 0;
+  margin: 0;
   font-size: 2rem;
   line-height: 0.95;
   letter-spacing: -0.04em;
@@ -289,6 +315,12 @@ a {
   font-size: 0.65rem;
 }
 
+/* Visual-only hover: tags are not links or buttons. */
+.dialog-tags li:hover {
+  background-color: black;
+  color: #f0efa4;
+}
+
 .dialog-close {
   position: absolute;
   top: 0.25rem;
@@ -366,10 +398,6 @@ a {
 }
 
 @media (width < 416px) {
-  .site-credit {
-    font-size: 1rem;
-  }
-
   .site-intro {
     font-size: 1rem;
   }
@@ -384,7 +412,7 @@ a {
   }
 
   .dialog-name {
-    font-size: 1.7rem;
+    font-size: 1rem;
   }
 
   .reading-list li {
